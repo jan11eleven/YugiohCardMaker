@@ -1,0 +1,25 @@
+.selected {
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Matrix;
+  src: url(../fonts/Matrix.ttf);
+}
+
+.card-container {
+  position: relative;
+  font-family: Matrix;
+  color: rgb(26, 26, 26);
+  width: 280px;
+}
+.card {
+  height: 400px;
+  position: absolute;
+  border-radius: 5px;
+  width: 280px;
+}
+
+.converted-image {
+  height: 400px;
+}
