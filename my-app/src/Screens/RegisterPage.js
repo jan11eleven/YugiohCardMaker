@@ -1,8 +1,9 @@
 import { React, useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../redux/index";
+import Loading from "../Components/Loading";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -35,34 +36,61 @@ function RegisterPage() {
   }, []);
 
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={userSignupForm}>
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          placeholder="Email"
-        />
-        <input
-          onChange={(e) => setUsername(e.target.value)}
-          type="text"
-          placeholder="Username"
-        />
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          placeholder="Password"
-        />
-        {stateSignup.signupError ? <p>{stateSignup.signupError}</p> : ""}
-        <button>Sign Up</button>
-      </form>
-      {stateSignup.loading && <p>Loading...</p>}
-      {stateSignup.isSuccess && <Redirect to="/login" />}
-      {stateLogin.loginState.isAuth ? (
-        <Redirect to="/" />
-      ) : (
-        <label>{stateLogin.loginState.loginError}</label>
-      )}
+    <div className="flex h-screen">
+      <div className="signup-login-form">
+        <h1 className="signup-login-title">Sign Up</h1>
+        <form onSubmit={userSignupForm}>
+          <div>
+            <label className="signup-login-input-label">Email</label>
+            <br />
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder="Enter your Email"
+              className="signup-login-input-textbox"
+            />
+          </div>
+          <div>
+            <label className="signup-login-input-label">Username</label>
+            <br />
+            <input
+              onChange={(e) => setUsername(e.target.value)}
+              type="text"
+              placeholder="Enter your Username"
+              className="signup-login-input-textbox"
+            />
+          </div>
+          <div>
+            <label className="signup-login-input-label">Password</label>
+            <br />
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder="Enter your Password"
+              className="signup-login-input-textbox"
+            />
+          </div>
+          {stateSignup.signupError ? (
+            <p className="signup-login-error-message">
+              {stateSignup.signupError}
+            </p>
+          ) : (
+            ""
+          )}
+          <button className="signup-login-form-submit">Sign Up</button>
+          <p className="signup-login-link-btn">
+            <span className="text-gray-900">Already registered? </span>
+            <Link to="/login">Log In</Link>
+          </p>
+        </form>
+        {stateSignup.loading && <Loading />}
+        {stateSignup.isSuccess && <Redirect to="/login" />}
+        {stateLogin.loginState.isAuth ? (
+          <Redirect to="/" />
+        ) : (
+          <p className="signup-login-error-message"></p>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,5 +1,8 @@
 .selected {
   font-weight: bold;
+  color: #2c38a7;
+  height: 100%;
+  width: 100%;
 }
 
 @font-face {
@@ -12,6 +15,8 @@
   font-family: Matrix;
   color: rgb(26, 26, 26);
   width: 280px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .card {
   height: 400px;

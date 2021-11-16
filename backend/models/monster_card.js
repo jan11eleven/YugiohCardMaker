@@ -50,6 +50,10 @@ const CardsSchema = new Schema(
       type: String,
       required: true,
     },
+    ConvertedImage: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

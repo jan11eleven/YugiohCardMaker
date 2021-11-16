@@ -4,6 +4,10 @@ import MonsterCardCard from "../Components/MonsterCardCard";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../redux/index";
+import AllPageTitles from "../Components/AllPageTitles";
+import { PlusCircleIcon } from "@heroicons/react/solid";
+import Loading from "../Components/Loading";
+import CardIsEmpty from "../Components/CardIsEmpty";
 
 function MonsterCardPage() {
   const dispatch = useDispatch();
@@ -17,20 +21,21 @@ function MonsterCardPage() {
 
   return (
     <div>
-      <h1>Your Monster Cards</h1>
-      <p>
+      <AllPageTitles title="Your Monster Cards" />
+      <button className="add-card-btn">
+        <PlusCircleIcon className="PlusCircleIconStyles" />
         <NavLink to="/monsters/add">Add Monster Card</NavLink>
-      </p>
+      </button>
 
       {state.loading ? (
-        "Loading.."
+        <Loading />
       ) : state.error === "" ? (
         state.monsterCards.length !== 0 ? (
           state.monsterCards.map((card) => (
             <MonsterCardCard cardInfo={card} key={card._id} />
           ))
         ) : (
-          "Monster card bag is empty!"
+          <CardIsEmpty card="Monster" />
         )
       ) : (
         <p>{state.error}</p>

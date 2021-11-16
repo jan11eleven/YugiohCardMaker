@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/index";
 import { bindActionCreators } from "redux";
+import Loading from "../Components/Loading";
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -23,30 +24,47 @@ function LoginPage() {
   };
 
   return (
-    <div>
-      <h1>Login Page</h1>
-      <form onSubmit={loginUserForm}>
-        <label>Username</label>
-        <input
-          onChange={(e) => setUsername(e.target.value)}
-          type="text"
-          name="Username"
-        />
-        <label>Password</label>
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          name="Password"
-        />
-        <button>Login</button>
-        <Link to="/signup">Sign Up here!</Link>
-        {state.loginState.isAuth ? (
-          <Redirect to="/" />
-        ) : (
-          <label>{state.loginState.loginError}</label>
-        )}
-        {state.loading ? <p>Loading...</p> : ""}
-      </form>
+    <div className="flex h-screen">
+      <div className="signup-login-form">
+        <h1 className="signup-login-title">Log In</h1>
+        <form onSubmit={loginUserForm}>
+          <div>
+            <label className="signup-login-input-label">Username</label>
+            <br />
+            <input
+              onChange={(e) => setUsername(e.target.value)}
+              type="text"
+              name="Username"
+              className="signup-login-input-textbox"
+              placeholder="Enter your Username"
+            />
+          </div>
+          <div>
+            <label className="signup-login-input-label">Password</label>
+            <br />
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              name="Password"
+              className="signup-login-input-textbox"
+              placeholder="Enter your Password"
+            />
+          </div>
+          {state.loginState.isAuth ? (
+            <Redirect to="/" />
+          ) : (
+            <p className="signup-login-error-message">
+              {state.loginState.loginError}
+            </p>
+          )}
+          <button className="signup-login-form-submit">Login</button>
+          <p className="signup-login-link-btn">
+            <span className="text-gray-900">Not registered yet? </span>
+            <Link to="/signup">Signup now</Link>
+          </p>
+          {state.loading ? <Loading /> : ""}
+        </form>
+      </div>
     </div>
   );
 }

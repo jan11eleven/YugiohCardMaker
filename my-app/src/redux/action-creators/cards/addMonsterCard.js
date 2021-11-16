@@ -19,7 +19,7 @@ const addMonsterCardFails = (error) => ({
   payload: error,
 });
 // action creator
-const addMonsterCard = ({ monsterCard, selectedImage }) => {
+const addMonsterCard = ({ monsterCard, selectedImage, fileData }) => {
   return (dispatch) => {
     dispatch(addMonsterCardRequest());
     let bodyFormData = new FormData();
@@ -36,6 +36,7 @@ const addMonsterCard = ({ monsterCard, selectedImage }) => {
     bodyFormData.append("CardAuthor", monsterCard.CardAuthor);
 
     bodyFormData.append("file", selectedImage);
+    bodyFormData.append("file", fileData);
     axios({
       method: "post",
       url: "/api/cards/monsters",

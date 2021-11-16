@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./css/App.css";
+import "./css/Monster.css";
 import "./css/Trap.css";
 import "./css/Spell.css";
 import { useLocation, Switch, Route, Redirect } from "react-router-dom";
@@ -19,6 +20,7 @@ import TrapCardEdit from "./Screens/TrapCardEdit";
 import RegisterPage from "./Screens/RegisterPage";
 import LoginPage from "./Screens/LoginPage";
 import HomePage from "./Screens/HomePage";
+import Footer from "./Components/Footer";
 
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "./redux/index";
@@ -161,6 +163,9 @@ function App() {
           {state.loginState.isAuth ? <HomePage /> : <Redirect to="/login" />}
         </Route>
       </Switch>
+      {/* {location.pathname !== "/login" && location.pathname !== "/signup" && (
+        <Footer />
+      )} */}
     </div>
   );
 }

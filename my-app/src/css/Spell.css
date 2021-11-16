@@ -1,7 +1,7 @@
 .spell-card-name {
   position: absolute;
   font-size: 1.5rem;
-  top: 1.5rem;
+  top: 1.2rem;
   left: 2.2rem;
   width: 12rem;
   overflow-wrap: break-word;
@@ -10,7 +10,7 @@
 
 .spell-card-img {
   position: absolute;
-  top: 5.32em;
+  top: 5.3rem;
   left: 2.45rem;
   height: 12.45rem;
   width: 12.47rem;
@@ -21,8 +21,9 @@
 .spell-card-eff {
   position: absolute;
   top: 19.2rem;
-  left: 1.8rem;
-  font-size: 0.65rem;
+  left: 2rem;
+  font-size: 0.7rem;
   width: 13.63rem;
   overflow-wrap: break-word;
+  line-height: 1;
 }

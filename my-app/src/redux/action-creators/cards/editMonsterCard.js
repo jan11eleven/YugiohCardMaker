@@ -19,7 +19,7 @@ const editMonsterCardFails = (error) => ({
 });
 
 // action-creator
-const editMonsterCard = ({ monsterCard, selectedImage }) => {
+const editMonsterCard = ({ monsterCard, selectedImage, fileData }) => {
   return (dispatch) => {
     dispatch(editMonsterCardRequest());
     let bodyFormData = new FormData();
@@ -36,8 +36,11 @@ const editMonsterCard = ({ monsterCard, selectedImage }) => {
     bodyFormData.append("MonsterAttack", monsterCard.MonsterAttack);
     bodyFormData.append("MonsterDefense", monsterCard.MonsterDefense);
     bodyFormData.append("CardAuthor", monsterCard.CardAuthor);
+    bodyFormData.append("ConvertedImage", monsterCard.ConvertedImage);
 
     bodyFormData.append("file", selectedImage);
+    bodyFormData.append("file", fileData);
+
     axios({
       method: "patch",
       url: "/api/cards/monsters/" + monsterCard._id,

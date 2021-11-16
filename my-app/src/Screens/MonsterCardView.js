@@ -1,11 +1,16 @@
 import { React, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import downloadImage from "../cards_img/downloadImage";
 import axios from "axios";
+import AllPageTitles from "../Components/AllPageTitles";
+import { DownloadIcon, PencilIcon } from "@heroicons/react/solid";
+import Loading from "../Components/Loading";
 
 function MonsterCardView() {
   const { card_id } = useParams();
   const [cardInfo, setCardInfo] = useState([]);
-
+  const [loading, setLoading] = useState(true);
+  const imgUrl = "/image/" + cardInfo.ConvertedImage;
   // get card on load
   useEffect(() => {
     const fetchCardInfo = async () => {
@@ -19,26 +24,35 @@ function MonsterCardView() {
 
   return (
     <div>
-      <h1>Monster Card</h1>
+      <AllPageTitles title={cardInfo.MonsterName} />
+
       {cardInfo.length === 0 ? (
-        <p>Loading..</p>
+        <Loading />
       ) : (
-        <div>
-          <img alt="Monster" src={"/image/" + cardInfo.MonsterImage} />
-          <h2>{cardInfo.MonsterName}</h2>
-          <p>Card Type: {cardInfo.CardType}</p>
-          <p>Attribute: {cardInfo.MonsterAttribute}</p>
-          <p>Star Level: {cardInfo.MonsterStar}</p>
-          <p>
-            {cardInfo.MonsterRace + " / "}
-            {cardInfo.MonsterIsNormal ? "Description" : "Effect"}:{" "}
-            {cardInfo.MonsterEffDesc}
-          </p>
-          <p>Attack: {cardInfo.MonsterAttack}</p>
-          <p>Defense: {cardInfo.MonsterDefense}</p>
-          <Link to={"/monster/edit/" + cardInfo._id}>
-            <button>Edit</button>
-          </Link>
+        <div className="view-card-container ">
+          <img
+            alt="Monster"
+            className="converted-image view-card-converted"
+            src={"/image/" + cardInfo.ConvertedImage}
+            onLoad={() => setLoading(false)}
+          />
+          <div className="view-card-btn-container">
+            <button
+              onClick={() => {
+                downloadImage(imgUrl, cardInfo.MonsterName);
+              }}
+              className="view-card-download-btn"
+            >
+              <DownloadIcon className="DownloadIconStyles" />
+              Download
+            </button>
+            <Link to={"/monster/edit/" + cardInfo._id}>
+              <button className="view-card-edit-btn">
+                <PencilIcon className="PencilIconStyles" />
+                Edit
+              </button>
+            </Link>
+          </div>
         </div>
       )}
     </div>

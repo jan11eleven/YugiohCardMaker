@@ -4,6 +4,10 @@ import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/index";
 import SpellCardCard from "../Components/SpellCardCard";
+import AllPageTitles from "../Components/AllPageTitles";
+import { PlusCircleIcon } from "@heroicons/react/solid";
+import Loading from "../Components/Loading";
+import CardIsEmpty from "../Components/CardIsEmpty";
 
 function SpellCardPage() {
   const dispatch = useDispatch();
@@ -17,20 +21,21 @@ function SpellCardPage() {
 
   return (
     <div>
-      <h1>Your Spell Cards</h1>
-      <p>
+      <AllPageTitles title="Your Spell Cards" />
+      <button className="add-card-btn">
+        <PlusCircleIcon className="PlusCircleIconStyles" />
         <NavLink to="/spells/add">Add Spell Card</NavLink>
-      </p>
+      </button>
 
       {state.loading ? (
-        "Loading.."
+        <Loading />
       ) : state.error === "" ? (
         state.spellCards.length !== 0 ? (
           state.spellCards.map((card) => (
             <SpellCardCard cardInfo={card} key={card._id} />
           ))
         ) : (
-          "Spell card bag is empty!"
+          <CardIsEmpty card="Spell" />
         )
       ) : (
         <p>{state.error}</p>

@@ -1,7 +1,7 @@
 .trap-card-name {
   position: absolute;
   font-size: 1.5rem;
-  top: 1.5rem;
+  top: 1.3rem;
   left: 2.2rem;
   width: 12rem;
   overflow-wrap: break-word;
@@ -20,9 +20,10 @@
 
 .trap-card-eff {
   position: absolute;
-  top: 19.2rem;
-  left: 1.8rem;
-  font-size: 0.65rem;
+  top: 19.3rem;
+  left: 2rem;
+  font-size: 0.7rem;
   width: 13.63rem;
   overflow-wrap: break-word;
+  line-height: 1;
 }

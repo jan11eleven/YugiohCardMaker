@@ -22,7 +22,7 @@ const monsterRaceArr = [
   "Winged-Beast",
   "Zombie",
 ].sort();
-const monsterTypeArr = ["Normal", "Fusion", "Synchro", "XYZ"];
+const monsterTypeArr = ["Normal", "Effect", "Ritual", "Fusion", "Synchro"];
 const monsterAttributeArr = [
   "Dark",
   "Light",

@@ -20,7 +20,7 @@ const fetchTrapCardFails = (error) => ({
 
 const fetchAllTraps = () => {
   return (dispatch) => {
-    dispatch(fetchTrapCardRequest);
+    dispatch(fetchTrapCardRequest());
     axios
       .get("/api/cards/traps")
       .then((res) => {

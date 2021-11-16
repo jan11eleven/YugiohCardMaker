@@ -3,9 +3,9 @@ const routes = express.Router();
 const MonsterCardModel = require("../models/monster_card");
 
 // @routes POST / - create 1 monster card
-routes.post("/", globalVariable.upload.single("file"), (req, res) => {
+routes.post("/", globalVariable.upload.array("file", 12), (req, res) => {
   const monsterCard = new MonsterCardModel({
-    MonsterImage: req.file.filename,
+    MonsterImage: req.files[0].filename,
     MonsterName: req.body.MonsterName,
     CardType: req.body.CardType,
     MonsterType: req.body.MonsterType,
@@ -17,6 +17,7 @@ routes.post("/", globalVariable.upload.single("file"), (req, res) => {
     MonsterAttack: req.body.MonsterAttack,
     MonsterDefense: req.body.MonsterDefense,
     CardAuthor: req.body.CardAuthor,
+    ConvertedImage: req.files[1].filename,
   });
 
   monsterCard
@@ -69,43 +70,59 @@ routes.get("/:id", async (req, res) => {
 });
 
 // @routes /:id PATCH 1 monster card
-routes.patch("/:id", globalVariable.upload.single("file"), async (req, res) => {
-  const cardUpdated = {};
-  if (req.file != null) {
+routes.patch(
+  "/:id",
+  globalVariable.upload.array("file", 12),
+  async (req, res) => {
+    const cardUpdated = {};
+    if (req.files.length === 2) {
+      globalVariable.gfs.remove(
+        { _id: req.body.MonsterImage, root: "uploads" },
+        (err, gridStore) => {
+          if (err) {
+            return res.status(404).json({ error: err });
+          }
+        }
+      );
+      cardUpdated.MonsterImage = req.files[0].filename;
+      cardUpdated.ConvertedImage = req.files[1].filename;
+    } else {
+      cardUpdated.MonsterImage = req.body.MonsterImage;
+      cardUpdated.ConvertedImage = req.files[0].filename;
+    }
+
     globalVariable.gfs.remove(
-      { _id: req.body.MonsterImage, root: "uploads" },
+      { filename: req.body.ConvertedImage, root: "uploads" },
       (err, gridStore) => {
         if (err) {
           return res.status(404).json({ error: err });
         }
       }
     );
-    cardUpdated.MonsterImage = req.file.filename;
-  } else {
-    cardUpdated.MonsterImage = req.body.MonsterImage;
-  }
-  cardUpdated.MonsterName = req.body.MonsterName;
-  cardUpdated.CardType = req.body.CardType;
-  cardUpdated.MonsterRace = req.body.MonsterRace;
-  cardUpdated.MonsterType = req.body.MonsterType;
-  cardUpdated.MonsterEffDesc = req.body.MonsterEffDesc;
-  cardUpdated.MonsterAttribute = req.body.MonsterAttribute;
-  cardUpdated.MonsterStar = req.body.MonsterStar;
-  cardUpdated.MonsterAttack = req.body.MonsterAttack;
-  cardUpdated.MonsterDefense = req.body.MonsterDefense;
-  cardUpdated.CardAuthor = req.body.CardAuthor;
 
-  try {
-    const data = await MonsterCardModel.findByIdAndUpdate(
-      { _id: req.params.id },
-      cardUpdated,
-      { new: true, useFindAndModify: false }
-    );
-    res.send(data);
-  } catch (err) {
-    res.status(404).send({ message: err });
+    cardUpdated.MonsterName = req.body.MonsterName;
+    cardUpdated.CardType = req.body.CardType;
+    cardUpdated.MonsterRace = req.body.MonsterRace;
+    cardUpdated.MonsterType = req.body.MonsterType;
+    cardUpdated.MonsterEffDesc = req.body.MonsterEffDesc;
+    cardUpdated.MonsterAttribute = req.body.MonsterAttribute;
+    cardUpdated.MonsterStar = req.body.MonsterStar;
+    cardUpdated.MonsterAttack = req.body.MonsterAttack;
+    cardUpdated.MonsterDefense = req.body.MonsterDefense;
+    cardUpdated.CardAuthor = req.body.CardAuthor;
+
+    try {
+      const data = await MonsterCardModel.findByIdAndUpdate(
+        { _id: req.params.id },
+        cardUpdated,
+        { new: true, useFindAndModify: false }
+      );
+      res.send(data);
+    } catch (err) {
+      res.status(404).send({ message: err });
+    }
   }
-});
+);
 
 // @routes /:id DELETE 1 card
 routes.delete("/:id", async (req, res) => {
@@ -126,8 +143,16 @@ routes.delete("/:id", async (req, res) => {
           }
         }
       );
+      globalVariable.gfs.remove(
+        { filename: data.ConvertedImage, root: "uploads" },
+        (err, gridStore) => {
+          if (err) {
+            return res.status(404).json({ error: err });
+          }
+        }
+      );
     } else {
-      res.status(404).send({ message: "Card doesn't exist!" });
+      res.status(404).send({ error: 404, message: "Card doesn't exist!" });
     }
   } catch (err) {
     res.send({ message: err });

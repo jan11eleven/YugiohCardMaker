@@ -16,7 +16,7 @@ routes.post("/signup", async (req, res) => {
       Email: req.body.Email,
     });
     if (resUsername.length !== 0) {
-      signupError = "User already exists!";
+      signupError = "Username is already taken!";
       return res.send({
         newUser: {
           Email: undefined,
@@ -26,7 +26,7 @@ routes.post("/signup", async (req, res) => {
         signupError,
       });
     } else if (resEmail.length !== 0) {
-      signupError = "The email you provided has already been used!";
+      signupError = "The email you provided had already been used!";
       return res.send({
         newUser: {
           Email: undefined,
@@ -37,7 +37,7 @@ routes.post("/signup", async (req, res) => {
       });
     } else if (req.body.Username.length < 8 || req.body.Username.length > 16) {
       signupError =
-        "Please provide a username with minimum of 8 characters and maximum of 16 characters";
+        "Username must be minimum of 8 and maximum of 16 characters";
       return res.send({
         newUser: {
           Email: undefined,
@@ -48,7 +48,7 @@ routes.post("/signup", async (req, res) => {
       });
     } else if (req.body.Password.length < 8 || req.body.Password.length > 16) {
       signupError =
-        "Please provide a password with minimum of 8 characters and maximum of 16 characters";
+        "Password must be minimum of 8 and maximum of 16 characters";
       return res.send({
         newUser: {
           Email: undefined,

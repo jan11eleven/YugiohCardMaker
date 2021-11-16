@@ -1,3 +1,144 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* login css */
+.signup-login-title {
+  @apply text-4xl font-bold mb-8;
+}
+
+.signup-login-form {
+  @apply flex flex-col m-auto px-8 py-5 sm:w-8/12 md:w-5/12 lg:w-4/12 w-11/12;
+}
+
+.signup-login-input-textbox {
+  @apply w-full pb-3 pt-2 px-3 text-sm rounded my-2 border border-gray-400;
+}
+
+.signup-login-input-label {
+  @apply font-semibold;
+}
+
+.signup-login-form-submit {
+  @apply bg-yellow-300 w-full py-3 font-semibold rounded text-gray-700 my-4 border border-yellow-300 hover:text-yellow-600 hover:border-yellow-600 hover:bg-transparent transition-all;
+}
+
+.signup-login-link-btn {
+  @apply text-center text-indigo-600;
+}
+
+.signup-login-error-message {
+  @apply text-red-500 text-sm font-semibold;
+}
+/* add cards */
+.add-card-btn {
+  @apply flex bg-yellow-300 py-3 px-4 rounded-md text-purple-900 border-yellow-300 font-semibold mx-auto mt-3 mb-3 hover:bg-transparent border hover:border-purple-900 transition-all;
+}
+
+.PlusCircleIconStyles {
+  @apply h-6 w-6 text-purple-900 mr-1;
+}
+
+.card-card-container {
+  @apply w-10/12 max-w-sm bg-green-400 mx-auto flex flex-col p-4 rounded-lg sm:flex-row sm:items-center sm:max-w-none sm:w-max mt-2 mb-2;
+}
+
+.card-card-image {
+  @apply h-48 w-52 self-center;
+}
+
+.card-details-container {
+  @apply text-gray-800 flex flex-col items-center px-4;
+}
+
+.card-card-name {
+  @apply font-bold text-purple-800 text-center text-lg;
+}
+
+.card-btn-container {
+  @apply flex w-6/12 justify-around;
+}
+
+.CheckCircleIconStyles {
+  @apply h-6 w-6 text-purple-900 mr-1;
+}
+
+.EyeIconStyles {
+  @apply h-4 w-4 text-purple-900 mr-1 -ml-1;
+}
+
+.XIconStyles {
+  @apply h-4 w-4 text-gray-200 mr-1 -ml-1;
+}
+
+.DownloadIconStyles {
+  @apply h-5 w-5 text-gray-200 mr-1 -ml-2 text-blue-800;
+}
+
+.PencilIconStyles {
+  @apply h-5 w-5 text-gray-200 mr-1 -ml-2;
+}
+
+.view-card-btn {
+  @apply flex items-center bg-yellow-300 py-1 px-3 rounded-md text-purple-900 font-semibold mr-2 mt-3 mb-2 hover:bg-yellow-200 transition-all;
+}
+
+.delete-card-btn {
+  @apply flex items-center bg-red-600 py-1 px-3 rounded-md text-gray-200 font-semibold mt-3 mb-2 hover:bg-red-500 transition-all;
+}
+/* add card */
+.add-card-form-container {
+  @apply flex flex-col md:flex-row sm:w-10/12 w-full mx-auto md:items-start items-center;
+}
+
+.add-card-form {
+  @apply flex flex-col m-auto px-8 py-5 sm:w-7/12 md:w-6/12 lg:w-6/12 w-11/12;
+}
+
+.add-card-input-textbox {
+  @apply w-full pb-3 pt-2 px-3 text-sm rounded my-2 border border-gray-400;
+}
+
+.add-card-input-label {
+  @apply font-semibold;
+}
+
+.add-card-textarea {
+  @apply w-full max-h-48 p-2 border border-2 border-gray-400 my-2;
+}
+
+.add-card-select {
+  @apply w-full mt-1 p-1 border border-2 border-gray-400 rounded my-2;
+}
+
+.add-card-option {
+  @apply p-1;
+}
+
+.add-card-converted {
+  @apply w-max bg-red-600;
+}
+
+.view-card-container {
+  @apply mx-auto w-max py-5 px-4;
+}
+
+.view-card-converted {
+  @apply mx-auto;
+}
+
+.view-card-btn-container {
+  @apply w-full flex justify-center;
+}
+
+.view-card-download-btn {
+  @apply flex items-center bg-gray-100 text-sm py-3 px-4 rounded-md text-blue-600 border border-blue-600 font-semibold mt-3 hover:bg-gray-200 transition-all;
+}
+
+.view-card-edit-btn {
+  @apply flex items-center bg-blue-600 text-sm py-3 px-4 rounded-md text-gray-100 font-semibold mt-3 ml-4 hover:bg-blue-500 transition-all;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

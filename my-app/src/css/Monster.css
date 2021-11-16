@@ -1,0 +1,125 @@
+.monster-card-name {
+  position: absolute;
+  font-size: 1.5rem;
+  top: 1.2rem;
+  left: 2.2rem;
+  width: 12rem;
+  overflow-wrap: break-word;
+}
+
+.monster-card-star-container {
+  position: absolute;
+  top: 3.45rem;
+  left: 3rem;
+  width: 200px;
+  display: flex;
+  justify-content: end;
+}
+
+.monster-card-star {
+  height: 22px;
+  width: 23px;
+  margin-left: -5px;
+}
+
+.monster-card-attribute {
+  position: absolute;
+  top: 1.12rem;
+  left: 13.7rem;
+  height: 33px;
+  width: 33px;
+}
+
+.monster-card-img {
+  position: absolute;
+  top: 5.35em;
+  left: 2.5rem;
+  height: 12.55rem;
+  width: 12.57rem;
+  margin: auto;
+  filter: brightness(90%);
+}
+
+.monster-card-race {
+  position: absolute;
+  top: 19.1rem;
+  left: 1.9rem;
+  font-size: 0.8rem;
+  width: 13.63rem;
+  font-weight: bold;
+  overflow-wrap: break-word;
+}
+
+.monster-card-eff {
+  position: absolute;
+  top: 20.3rem;
+  left: 2rem;
+  font-size: 0.7rem;
+  width: 13.63rem;
+  overflow-wrap: break-word;
+  line-height: 0.8;
+}
+
+.monster-card-attack {
+  position: absolute;
+  top: 22.5rem;
+  left: 10.61rem;
+  font-size: 0.85rem;
+  overflow-wrap: break-word;
+  font-family: "Times New Roman";
+  font-weight: bold;
+}
+
+.monster-card-defense {
+  position: absolute;
+  top: 22.5rem;
+  left: 14.2rem;
+  font-size: 0.85rem;
+  overflow-wrap: break-word;
+  font-family: "Times New Roman";
+  font-weight: bold;
+}
+
+.Dark {
+  top: 1.22rem;
+}
+
+.Earth {
+  height: 29px;
+  top: 1.42rem;
+}
+
+.Divine {
+  height: 34px;
+  width: 34px;
+  left: 13.6rem;
+}
+
+.Fire {
+  height: 30px;
+  width: 34px;
+  top: 1.34rem;
+  left: 13.6rem;
+}
+
+.Light {
+  height: 34px;
+  width: 32px;
+  left: 13.7rem;
+  filter: brightness(140%);
+}
+
+.Water {
+  height: 30px;
+  width: 34px;
+  top: 1.34rem;
+  left: 13.6rem;
+  filter: brightness(110%);
+}
+
+.Wind {
+  top: 1.35rem;
+  left: 13.75rem;
+  height: 31px;
+  width: 31px;
+}

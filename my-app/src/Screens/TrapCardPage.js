@@ -4,6 +4,10 @@ import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/index";
 import TrapCardCard from "../Components/TrapCardCard";
+import AllPageTitles from "../Components/AllPageTitles";
+import { PlusCircleIcon } from "@heroicons/react/solid";
+import Loading from "../Components/Loading";
+import CardIsEmpty from "../Components/CardIsEmpty";
 
 function TrapCardPage() {
   const dispatch = useDispatch();
@@ -14,20 +18,21 @@ function TrapCardPage() {
   }, []);
   return (
     <div>
-      <h1>Your Trap Cards</h1>
-      <p>
-        <NavLink to="/traps/add">add trap card</NavLink>
-      </p>
+      <AllPageTitles title="Your Trap Cards" />
+      <button className="add-card-btn">
+        <PlusCircleIcon className="PlusCircleIconStyles" />
+        <NavLink to="/traps/add">Add Trap Card</NavLink>
+      </button>
 
       {state.loading ? (
-        "Loading.."
+        <Loading />
       ) : state.error === "" ? (
         state.trapCards.length !== 0 ? (
           state.trapCards.map((card) => (
             <TrapCardCard cardInfo={card} key={card._id} />
           ))
         ) : (
-          "Trap card bag is empty!"
+          <CardIsEmpty card="Trap" />
         )
       ) : (
         <p>{state.error}</p>

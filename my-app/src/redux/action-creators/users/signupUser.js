@@ -31,7 +31,6 @@ const signupUser = (user) => {
     axios
       .post("/api/users/signup", user)
       .then((res) => {
-        console.log(res.data);
         if (res.data.signupError) {
           dispatch(signupUserError(res.data.signupError));
         } else {

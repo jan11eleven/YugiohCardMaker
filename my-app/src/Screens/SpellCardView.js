@@ -2,6 +2,9 @@ import { React, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import downloadImage from "../cards_img/downloadImage";
+import AllPageTitles from "../Components/AllPageTitles";
+import Loading from "../Components/Loading";
+import { DownloadIcon, PencilIcon } from "@heroicons/react/solid";
 
 function SpellCardView() {
   const { card_id } = useParams();
@@ -21,26 +24,33 @@ function SpellCardView() {
 
   return (
     <div>
-      <h1>{cardInfo.SpellName}</h1>
+      <AllPageTitles title={cardInfo.SpellName} />
       {cardInfo.length === 0 ? (
-        <p>Loading..</p>
+        <Loading />
       ) : (
-        <div>
+        <div className="view-card-container">
           <img
             alt="Spell"
             src={"/image/" + cardInfo.ConvertedImage}
-            className="converted-image"
+            className="converted-image view-card-converted"
           />
-          <button
-            onClick={() => {
-              downloadImage(imgUrl, cardInfo.SpellName);
-            }}
-          >
-            download
-          </button>
-          <Link to={"/spells/edit/" + cardInfo._id}>
-            <button>Edit</button>
-          </Link>
+          <div className="view-card-btn-container">
+            <button
+              onClick={() => {
+                downloadImage(imgUrl, cardInfo.SpellName);
+              }}
+              className="view-card-download-btn"
+            >
+              <DownloadIcon className="DownloadIconStyles" />
+              Download
+            </button>
+            <Link to={"/spells/edit/" + cardInfo._id}>
+              <button className="view-card-edit-btn">
+                <PencilIcon className="PencilIconStyles" />
+                Edit
+              </button>
+            </Link>
+          </div>
         </div>
       )}
     </div>
