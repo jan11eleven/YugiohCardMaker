@@ -6,12 +6,12 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../redux/index";
 import domtoimage from "dom-to-image";
-import NormalSpell from "../cards_img/NormalSpell.png";
-import FieldSpell from "../cards_img/FieldSpell.png";
-import EquipSpell from "../cards_img/EquipSpell.png";
-import QuickSpell from "../cards_img/QuickSpell.png";
-import RitualSpell from "../cards_img/RitualSpell.png";
-import ContinuousSpell from "../cards_img/ContinuousSpell.png";
+import NormalSpell from "../cards_img/NormalSpell.webp";
+import FieldSpell from "../cards_img/FieldSpell.webp";
+import EquipSpell from "../cards_img/EquipSpell.webp";
+import QuickSpell from "../cards_img/QuickSpell.webp";
+import RitualSpell from "../cards_img/RitualSpell.webp";
+import ContinuousSpell from "../cards_img/ContinuousSpell.webp";
 import dataURLtoFile from "../cards_img/dataUrlToFile";
 import AllPageTitles from "../Components/AllPageTitles";
 import { CheckCircleIcon } from "@heroicons/react/solid";
@@ -123,12 +123,8 @@ function SpellCardEdit() {
       setSpellName(e.target.value);
       setSpellNameError(undefined);
     } else {
-      setSpellNameError(
-        '"' +
-          e.target.value[e.target.value.length - 1] +
-          '"' +
-          " character is not allowed!"
-      );
+      setSpellName(e.target.value);
+      setSpellNameError("Spell Name is invalid!");
     }
   };
 
@@ -209,7 +205,14 @@ function SpellCardEdit() {
             ></textarea>
             {spellEffError ? <ErrorMessage error={spellEffError} /> : ""}
           </div>
-          <button className="add-card-btn">
+          <button
+            className={
+              spellNameError || spellEffError
+                ? "add-card-btn-disabled"
+                : "add-card-btn"
+            }
+            disabled={spellNameError || spellEffError ? true : false}
+          >
             <CheckCircleIcon className="CheckCircleIconStyles" />
             Submit
           </button>

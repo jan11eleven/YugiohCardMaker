@@ -24,6 +24,10 @@
   @apply bg-yellow-300 w-full py-3 font-semibold rounded text-gray-700 my-4 border border-yellow-300 hover:text-yellow-600 hover:border-yellow-600 hover:bg-transparent transition-all;
 }
 
+.signup-login-form-submit-disabled {
+  @apply bg-yellow-300 w-full py-3 font-semibold rounded text-gray-700 my-4 border border-yellow-300 cursor-default opacity-80;
+}
+
 .signup-login-link-btn {
   @apply text-center text-indigo-600;
 }
@@ -34,6 +38,10 @@
 /* add cards */
 .add-card-btn {
   @apply flex bg-yellow-300 py-3 px-4 rounded-md text-purple-900 border-yellow-300 font-semibold mx-auto mt-3 mb-3 hover:bg-transparent border hover:border-purple-900 transition-all;
+}
+
+.add-card-btn-disabled {
+  @apply flex bg-yellow-300 py-3 px-4 rounded-md text-purple-900 border-yellow-300 font-semibold mx-auto mt-3 mb-3 cursor-default opacity-80;
 }
 
 .PlusCircleIconStyles {

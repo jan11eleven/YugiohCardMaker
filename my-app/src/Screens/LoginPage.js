@@ -4,16 +4,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators } from "../redux/index";
 import { bindActionCreators } from "redux";
 import Loading from "../Components/Loading";
+import ErrorMessage from "../Components/ErrorMessage";
 
 function LoginPage() {
   const dispatch = useDispatch();
-  const { loginUser, authUser } = bindActionCreators(actionCreators, dispatch);
+  const { loginUser } = bindActionCreators(actionCreators, dispatch);
   const state = useSelector((state) => state.loginUser);
+
+  const regex = /^[A-Za-z0-9_]*$/;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [usernameError, setUsernameError] = useState(undefined);
+
   const loginUserForm = (e) => {
     e.preventDefault();
+
+    if (usernameError) {
+      return;
+    }
 
     const userCred = {
       Username: username,
@@ -21,6 +30,20 @@ function LoginPage() {
     };
 
     loginUser(userCred);
+  };
+
+  const setUsernameHandler = (e) => {
+    if (e.target.value.length > 16) {
+      setUsernameError("Characters shouldn't exceed in 16");
+    } else if (regex.test(e.target.value)) {
+      setUsername(e.target.value);
+      setUsernameError(undefined);
+    } else {
+      setUsername(e.target.value);
+      setUsernameError(
+        "Letters, Numbers and Underscore are the only characters allowed!"
+      );
+    }
   };
 
   return (
@@ -32,12 +55,15 @@ function LoginPage() {
             <label className="signup-login-input-label">Username</label>
             <br />
             <input
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={setUsernameHandler}
               type="text"
               name="Username"
               className="signup-login-input-textbox"
               placeholder="Enter your Username"
+              value={username}
+              required
             />
+            {usernameError ? <ErrorMessage error={usernameError} /> : ""}
           </div>
           <div>
             <label className="signup-login-input-label">Password</label>
@@ -48,6 +74,7 @@ function LoginPage() {
               name="Password"
               className="signup-login-input-textbox"
               placeholder="Enter your Password"
+              required
             />
           </div>
           {state.loginState.isAuth ? (
@@ -57,7 +84,16 @@ function LoginPage() {
               {state.loginState.loginError}
             </p>
           )}
-          <button className="signup-login-form-submit">Login</button>
+          <button
+            className={
+              usernameError
+                ? "signup-login-form-submit-disabled"
+                : "signup-login-form-submit"
+            }
+            disabled={usernameError ? true : false}
+          >
+            Login
+          </button>
           <p className="signup-login-link-btn">
             <span className="text-gray-900">Not registered yet? </span>
             <Link to="/signup">Signup now</Link>

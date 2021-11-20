@@ -1,8 +1,5 @@
 import { useEffect } from "react";
-import "./css/App.css";
-import "./css/Monster.css";
-import "./css/Trap.css";
-import "./css/Spell.css";
+import "./css/App.min.css";
 import { useLocation, Switch, Route, Redirect } from "react-router-dom";
 import NavigationBar from "./Components/Navigation";
 import MonsterCardPage from "./Screens/MonsterCardPage";
@@ -42,7 +39,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       {location.pathname !== "/login" && location.pathname !== "/signup" && (
         <NavigationBar />
       )}
@@ -163,9 +160,9 @@ function App() {
           {state.loginState.isAuth ? <HomePage /> : <Redirect to="/login" />}
         </Route>
       </Switch>
-      {/* {location.pathname !== "/login" && location.pathname !== "/signup" && (
+      {location.pathname !== "/login" && location.pathname !== "/signup" && (
         <Footer />
-      )} */}
+      )}
     </div>
   );
 }

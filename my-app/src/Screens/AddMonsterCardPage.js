@@ -9,19 +9,19 @@ import {
   monsterAttributeArr,
   monsterRaceArr,
 } from "../card_meta_data/index";
-import NormalMonster from "../cards_img/monster_cards/NormalMonster.png";
-import EffectMonster from "../cards_img/monster_cards/EffectMonster.png";
-import FusionMonster from "../cards_img/monster_cards/FusionMonster.png";
-import RitualMonster from "../cards_img/monster_cards/RitualMonster.png";
-import SynchroMonster from "../cards_img/monster_cards/SynchroMonster.png";
-import Fire from "../cards_img/monsterAttrib/Fire.png";
-import Dark from "../cards_img/monsterAttrib/Dark.png";
-import Water from "../cards_img/monsterAttrib/Water.png";
-import Light from "../cards_img/monsterAttrib/Light.png";
-import Earth from "../cards_img/monsterAttrib/Earth.png";
-import Wind from "../cards_img/monsterAttrib/Wind.png";
-import Divine from "../cards_img/monsterAttrib/Divine.png";
-import Star from "../cards_img/Star.png";
+import NormalMonster from "../cards_img/monster_cards/NormalMonster.webp";
+import EffectMonster from "../cards_img/monster_cards/EffectMonster.webp";
+import FusionMonster from "../cards_img/monster_cards/FusionMonster.webp";
+import RitualMonster from "../cards_img/monster_cards/RitualMonster.webp";
+import SynchroMonster from "../cards_img/monster_cards/SynchroMonster.webp";
+import Fire from "../cards_img/monsterAttrib/Fire.webp";
+import Dark from "../cards_img/monsterAttrib/Dark.webp";
+import Water from "../cards_img/monsterAttrib/Water.webp";
+import Light from "../cards_img/monsterAttrib/Light.webp";
+import Earth from "../cards_img/monsterAttrib/Earth.webp";
+import Wind from "../cards_img/monsterAttrib/Wind.webp";
+import Divine from "../cards_img/monsterAttrib/Divine.webp";
+import Star from "../cards_img/Star.webp";
 import dataURLtoFile from "../cards_img/dataUrlToFile";
 
 import AllPageTitles from "../Components/AllPageTitles";
@@ -184,12 +184,8 @@ function AddMonsterCardPage() {
       setMonsterName(e.target.value);
       setMonsterNameError(undefined);
     } else {
-      setMonsterNameError(
-        '"' +
-          e.target.value[e.target.value.length - 1] +
-          '"' +
-          " character is not allowed!"
-      );
+      setMonsterName(e.target.value);
+      setMonsterNameError("Monster Name is invalid!");
     }
   };
 
@@ -200,12 +196,8 @@ function AddMonsterCardPage() {
       setMonsterEffDesc(e.target.value);
       setMonsterEffDescError(undefined);
     } else {
-      setMonsterEffDescError(
-        '"' +
-          e.target.value[e.target.value.length - 1] +
-          '"' +
-          " character is not allowed!"
-      );
+      setMonsterEffDesc(e.target.value);
+      setMonsterEffDescError("MonsterEffect is invalid!");
     }
   };
 
@@ -382,7 +374,14 @@ function AddMonsterCardPage() {
               className="add-card-select"
             />
           </div>
-          <button className="add-card-btn">
+          <button
+            className={
+              monsterNameError || monsterEffDescError
+                ? "add-card-btn-disabled"
+                : "add-card-btn"
+            }
+            disabled={monsterNameError || monsterEffDescError ? true : false}
+          >
             <CheckCircleIcon className="CheckCircleIconStyles" /> Submit
           </button>
         </form>

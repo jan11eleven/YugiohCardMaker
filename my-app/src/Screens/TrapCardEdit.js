@@ -6,9 +6,9 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../redux/index";
 import dataURLtoFile from "../cards_img/dataUrlToFile";
-import NormalTrap from "../cards_img/NormalTrap.jpg";
-import ContinuousTrap from "../cards_img/ContinuousTrap.jpg";
-import CounterTrap from "../cards_img/CounterTrap.jpg";
+import NormalTrap from "../cards_img/NormalTrap.webp";
+import ContinuousTrap from "../cards_img/ContinuousTrap.webp";
+import CounterTrap from "../cards_img/CounterTrap.webp";
 import domtoimage from "dom-to-image";
 import AllPageTitles from "../Components/AllPageTitles";
 import { CheckCircleIcon } from "@heroicons/react/solid";
@@ -116,12 +116,8 @@ function TrapCardEdit() {
       setTrapName(e.target.value);
       setTrapNameError(undefined);
     } else {
-      setTrapNameError(
-        '"' +
-          e.target.value[e.target.value.length - 1] +
-          '"' +
-          " character is not allowed!"
-      );
+      setTrapName(e.target.value);
+      setTrapNameError("Trap Name is invalid!");
     }
   };
 
@@ -202,7 +198,14 @@ function TrapCardEdit() {
             ></textarea>
             {trapEffError ? <ErrorMessage error={trapEffError} /> : ""}
           </div>
-          <button className="add-card-btn">
+          <button
+            className={
+              trapNameError || trapEffError
+                ? "add-card-btn-disabled"
+                : "add-card-btn"
+            }
+            disabled={trapNameError || trapEffError ? true : false}
+          >
             <CheckCircleIcon className="CheckCircleIconStyles" /> Submit
           </button>
         </form>

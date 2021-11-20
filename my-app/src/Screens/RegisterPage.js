@@ -4,12 +4,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../redux/index";
 import Loading from "../Components/Loading";
+import ErrorMessage from "../Components/ErrorMessage";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const [emailError, setEmailError] = useState(undefined);
+  const [usernameError, setUsernameError] = useState(undefined);
   const dispatch = useDispatch();
+
+  const regex = /^[A-Za-z0-9_]*$/;
 
   const { signupUser, authUser } = bindActionCreators(actionCreators, dispatch);
   const stateSignup = useSelector((state) => state.signupUser);
@@ -17,6 +23,11 @@ function RegisterPage() {
 
   const userSignupForm = (e) => {
     e.preventDefault();
+
+    if (emailError) {
+      setEmailError("The email is invalid!");
+      return;
+    }
 
     const userData = {
       Email: email,
@@ -35,6 +46,36 @@ function RegisterPage() {
     authUserOnLoad();
   }, []);
 
+  const validateEmail = (email) => {
+    const emailRegex =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    return emailRegex.test(String(email).toLowerCase());
+  };
+
+  const setEmailHandler = (e) => {
+    setEmail(e.target.value);
+    if (validateEmail(e.target.value)) {
+      setEmailError(undefined);
+    } else {
+      setEmailError(true);
+    }
+  };
+
+  const setUsernameHandler = (e) => {
+    if (e.target.value.length > 16) {
+      setUsernameError("Characters shouldn't exceed in 16");
+    } else if (regex.test(e.target.value)) {
+      setUsername(e.target.value);
+      setUsernameError(undefined);
+    } else {
+      setUsername(e.target.value);
+      setUsernameError(
+        "Letters, Numbers and Underscore are the only characters allowed!"
+      );
+    }
+  };
+
   return (
     <div className="flex h-screen">
       <div className="signup-login-form">
@@ -44,21 +85,28 @@ function RegisterPage() {
             <label className="signup-login-input-label">Email</label>
             <br />
             <input
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={setEmailHandler}
               type="email"
               placeholder="Enter your Email"
               className="signup-login-input-textbox"
+              value={email}
             />
+            {typeof emailError === "string" ? (
+              <ErrorMessage error={emailError} />
+            ) : (
+              ""
+            )}
           </div>
           <div>
             <label className="signup-login-input-label">Username</label>
             <br />
             <input
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={setUsernameHandler}
               type="text"
               placeholder="Enter your Username"
               className="signup-login-input-textbox"
             />
+            {usernameError ? <ErrorMessage error={usernameError} /> : ""}
           </div>
           <div>
             <label className="signup-login-input-label">Password</label>
