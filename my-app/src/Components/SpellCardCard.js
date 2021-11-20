@@ -8,7 +8,6 @@ import { EyeIcon, XIcon } from "@heroicons/react/solid";
 function SpellCardCard({ cardInfo }) {
   const dispatch = useDispatch();
   const { deleteSpellCard } = bindActionCreators(actionCreators, dispatch);
-  const state = useSelector((state) => state.spellCard);
 
   const deleteHandler = () => {
     deleteSpellCard(cardInfo._id);
