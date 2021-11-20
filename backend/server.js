@@ -119,6 +119,15 @@ app.use("/api/cards/traps", require("./routes/trap_card"));
 app.use("/api/users", require("./routes/user"));
 
 // route error handler
-app.get("*", (req, res) => {
-  res.send({ error: 404, message: "Route doesn't exists!" }).status(404);
-});
+// app.get("*", (req, res) => {
+//   res.send({ error: 404, message: "Route doesn't exists!" }).status(404);
+// });
+
+// const __dirname = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(path.resolve(), "/my-app/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(path.resolve(), "my-app", "build", "index.html"));
+  });
+}

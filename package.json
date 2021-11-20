@@ -12,6 +12,7 @@
   },
   "scripts": {
     "server": "nodemon backend/server.js",
+    "start": "nodemon backend/server.js",
     "client": "npm start --prefix my-app",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
