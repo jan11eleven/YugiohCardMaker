@@ -19,12 +19,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jan11eleven/To-Do-React-App.git"
+    "url": "git+https://github.com/jan11eleven/YugiohCardMaker.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jan11eleven/To-Do-React-App/issues"
+    "url": "https://github.com/jan11eleven/YugiohCardMaker/issues"
   },
-  "homepage": "https://github.com/jan11eleven/To-Do-React-App#readme"
+  "homepage": "https://github.com/jan11eleven/YugiohCardMaker#readme"
 }
