@@ -15,7 +15,7 @@
     "start": "node backend/server.js",
     "client": "npm start --prefix my-app",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku:postbuild": "npm install"
+    "heroku:postbuild": "NPM_CONFIG_PRODUCTION=false"
   },
   "repository": {
     "type": "git",
