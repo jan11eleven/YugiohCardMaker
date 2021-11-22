@@ -44,6 +44,10 @@ conn.once("open", function () {
   globalVariable.gfs = gfs;
   // all set!
   console.log("Connected to MongoDB");
+
+  app.listen(port, () => {
+    console.log("LISTENING AT PORT " + port);
+  });
 });
 // create storage engine
 const storage = new GridFsStorage({
@@ -127,7 +131,3 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(path.resolve(), "my-app", "build", "index.html"));
   });
 }
-
-app.listen(port, () => {
-  console.log("LISTENING AT PORT " + port);
-});
