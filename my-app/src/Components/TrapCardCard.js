@@ -12,6 +12,7 @@ function TrapCardCard({ cardInfo }) {
   const deleteHandler = () => {
     deleteTrapCard(cardInfo._id);
   };
+
   return (
     <div className="card-card-container">
       <img

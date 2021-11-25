@@ -30,16 +30,25 @@ const mongodbURI =
   process.env.MONGODB_PW +
   "@cluster0.gqe5d.mongodb.net/YugiohCardDB?retryWrites=true&w=majority";
 
-mongoose.connect(mongodbURI, { useNewUrlParser: true });
-
 const conn = mongoose.createConnection(mongodbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
+mongoose.connect(mongodbURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+let gridFSBucket;
+
 conn.once("open", function () {
   gfs = Grid(conn.db);
   gfs.collection("uploads");
+
+  gridFSBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+    bucketName: "uploads",
+  });
 
   globalVariable.gfs = gfs;
   // all set!
@@ -89,6 +98,7 @@ app.get("/image/:id", (req, res) => {
     if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
       //read the image
       const readstream = globalVariable.gfs.createReadStream(file.filename);
+      // gridFSBucket.openDownloadStream(file.filename);
       readstream.pipe(res);
     } else {
       res.status(400).send({ error: "Not an image" });
