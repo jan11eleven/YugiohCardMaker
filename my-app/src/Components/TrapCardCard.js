@@ -15,11 +15,11 @@ function TrapCardCard({ cardInfo }) {
 
   return (
     <div className="card-card-container">
-      <img
+      {/* <img
         alt="Trap"
         src={"/image/" + cardInfo.TrapImage}
         className="card-card-image"
-      />
+      /> */}
       <div className="card-details-container">
         <p className="card-card-name">{cardInfo.TrapName}</p>
         <p>{cardInfo.TrapType} Trap</p>
