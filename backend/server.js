@@ -89,32 +89,25 @@ globalVariable.upload = upload;
 globalVariable.storage = storage;
 
 //@route GET /files/:id single file object
-app.get("/image/:id", (req, res) => {
-  globalVariable.gfs.files
-    .findOne({ filename: req.params.id }, (err, file) => {
-      if (!file || file.length === 0) {
-        return res.status(404).json({ error: "No file exists!" });
-      }
-      // check if image type
-      if (
-        file.contentType === "image/jpeg" ||
-        file.contentType === "image/png"
-      ) {
-        //read the image
-        const readstream = globalVariable.gfs.createReadStream(file.filename);
-        // gridFSBucket.openDownloadStream(file.filename);
-        readstream.pipe(res);
-      } else {
-        res.status(400).send({ error: "Not an image" });
-      }
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+app.get("/api/cards/image/:id", (req, res) => {
+  globalVariable.gfs.files.findOne({ filename: req.params.id }, (err, file) => {
+    if (!file || file.length === 0) {
+      return res.status(404).json({ error: "No file exists!" });
+    }
+    // check if image type
+    if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
+      //read the image
+      const readstream = globalVariable.gfs.createReadStream(file.filename);
+      // gridFSBucket.openDownloadStream(file.filename);
+      readstream.pipe(res);
+    } else {
+      res.status(400).send({ error: "Not an image" });
+    }
+  });
 });
 
 // @routes GET /files file object
-app.get("/images", (req, res) => {
+app.get("/api/cards/images", (req, res) => {
   globalVariable.gfs.files.find().toArray((err, files) => {
     if (!files || files.length === 0) {
       return res.status(404).json({ error: "No files exists!" });
