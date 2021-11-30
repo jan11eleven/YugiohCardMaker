@@ -17,10 +17,7 @@ function TrapCardCard({ cardInfo }) {
     <div className="card-card-container">
       <img
         alt="Trap"
-        src={
-          "https://onse-yugioh-cardmaker.herokuapp.com/api/cards/image/" +
-          cardInfo.TrapImage
-        }
+        src={"/api/cards/image/" + cardInfo.TrapImage}
         className="card-card-image"
       />
       <div className="card-details-container">
