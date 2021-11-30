@@ -89,7 +89,7 @@ globalVariable.upload = upload;
 globalVariable.storage = storage;
 
 //@route GET /files/:id single file object
-app.get("/api/cards/image/:id", (req, res) => {
+app.get("/image/:id", (req, res) => {
   try {
     globalVariable.gfs.files.findOne(
       { filename: req.params.id },
@@ -117,7 +117,7 @@ app.get("/api/cards/image/:id", (req, res) => {
 });
 
 // @routes GET /files file object
-app.get("/api/cards/images", (req, res) => {
+app.get("/images", (req, res) => {
   globalVariable.gfs.files.find().toArray((err, files) => {
     if (!files || files.length === 0) {
       return res.status(404).json({ error: "No files exists!" });

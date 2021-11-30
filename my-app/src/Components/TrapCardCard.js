@@ -17,7 +17,7 @@ function TrapCardCard({ cardInfo }) {
     <div className="card-card-container">
       <img
         alt="Trap"
-        src={"/api/cards/image/" + cardInfo.TrapImage}
+        src={"/image/" + cardInfo.TrapImage}
         className="card-card-image"
       />
       <div className="card-details-container">
